@@ -1,357 +1,725 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estiven Chiluisa | Blog & Portafolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estiven Chiluisa | Ingeniería en Software & Desarrollo</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          },
+          colors: {
+            cyber: {
+              bg: '#060913',
+              card: '#0d1326',
+              border: '#1e293b',
+              accent: '#38bdf8',
+              secondary: '#818cf8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    :root {
-      --bg: #090d16;
-      --card-bg: #111726;
-      --card-border: #1f293d;
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.15);
-      --text: #f1f5f9;
-      --muted: #94a3b8;
-      --tag-bg: #1e293b;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      background-color: #060913;
+      color: #f8fafc;
       overflow-x: hidden;
     }
 
-    header {
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(12px);
-      background: rgba(9, 13, 22, 0.85);
-      border-bottom: 1px solid var(--card-border);
-      z-index: 100;
-      padding: 16px 24px;
-    }
-
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 40px 24px;
-    }
-
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      padding: 60px 0 40px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 6px 14px;
-      background: var(--tag-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 999px;
-      font-size: 0.85rem;
-      color: var(--accent);
-      margin-bottom: 20px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, #ffffff 40%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 1.15rem;
-      max-width: 650px;
-      margin: 0 auto 30px;
-    }
-
-    .tech-stack {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-    }
-
-    .tech-pill {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      padding: 6px 14px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    /* Interactive Filter Bar */
-    .filter-bar {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 35px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      color: var(--muted);
-      padding: 8px 18px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: all 0.25s ease;
-    }
-
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--accent);
-      color: #090d16;
-      border-color: var(--accent);
-      box-shadow: 0 0 15px var(--accent-glow);
-    }
-
-    /* Blog Grid */
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-    }
-
-    .post-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-
-    .post-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent);
-      box-shadow: 0 10px 30px var(--accent-glow);
-    }
-
-    .post-category {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-
-    .post-card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 12px;
-      color: var(--text);
-    }
-
-    .post-card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 20px;
-      flex-grow: 1;
-    }
-
-    .post-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid var(--card-border);
-      padding-top: 14px;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .read-more {
-      color: var(--accent);
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    /* Modal */
-    .modal {
-      display: none;
+    /* Fondo de partículas interactivas */
+    #particles-canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(6px);
-      z-index: 200;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    .modal-content {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      max-width: 650px;
-      width: 100%;
-      max-height: 80vh;
-      overflow-y: auto;
-      padding: 32px;
+    /* Efecto Spotlight en tarjetas */
+    .spotlight-card {
+      position: relative;
+      background: rgba(13, 19, 38, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(56, 189, 248, 0.15);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(56, 189, 248, 0.12),
+        transparent 40%
+      );
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+
+    .spotlight-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56, 189, 248, 0.45);
+      box-shadow: 0 20px 40px -15px rgba(56, 189, 248, 0.15);
+    }
+
+    /* Marco animado de la foto de perfil */
+    .profile-glow {
       position: relative;
     }
-
-    .close-modal {
+    .profile-glow::before {
+      content: '';
       position: absolute;
-      top: 20px;
-      right: 20px;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 1.5rem;
-      cursor: pointer;
+      inset: -4px;
+      background: linear-gradient(45deg, #38bdf8, #818cf8, #c084fc, #38bdf8);
+      background-size: 300% 300%;
+      border-radius: 1.5rem;
+      z-index: -1;
+      animation: gradientRotate 6s ease infinite;
+      filter: blur(8px);
     }
 
-    .close-modal:hover {
-      color: #fff;
+    @keyframes gradientRotate {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    footer {
-      border-top: 1px solid var(--card-border);
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: 60px;
+    /* Cursor de máquina de escribir */
+    .typing-cursor::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+      color: #38bdf8;
     }
 
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Scrollbar personalizada */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #060913;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #38bdf8;
     }
   </style>
 </head>
-<body>
+<body class="antialiased selection:bg-sky-500 selection:text-white">
 
-  <header>
-    <div class="nav-container">
-      <a href="#" class="logo">&lt;Estiven.dev /&gt;</a>
-      <div class="nav-links">
-        <a href="#articulos">Artículos</a>
-        <a href="https://github.com/Estiven453" target="_blank">GitHub</a>
+  <!-- Lienzo de red de nodos -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Barra de Navegación Flotante -->
+  <header class="fixed top-0 left-0 right-0 z-40 bg-[#060913]/80 backdrop-blur-md border-b border-slate-800/80">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="font-mono text-lg font-semibold text-sky-400 hover:text-sky-300 transition flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        &lt;Estiven.dev /&gt;
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#sobre-mi" class="hover:text-sky-400 transition">Sobre mí</a>
+        <a href="#stack" class="hover:text-sky-400 transition">Tecnologías</a>
+        <a href="#proyectos" class="hover:text-sky-400 transition">Proyectos</a>
+        <a href="#articulos" class="hover:text-sky-400 transition">Apuntes Técnicos</a>
+        <a href="#terminal-section" class="hover:text-sky-400 transition font-mono text-xs bg-slate-800/90 px-3 py-1.5 rounded-md border border-slate-700 text-sky-300">
+          <i class="fa-solid fa-terminal mr-1"></i> Consola
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/Estiven453" target="_blank" rel="noopener"
+           class="flex items-center gap-2 bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/30 px-4 py-1.5 rounded-full text-sm font-medium transition">
+          <i class="fa-brands fa-github text-base"></i>
+          <span>GitHub</span>
+        </a>
       </div>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <div class="badge"> En constante aprendizaje</div>
-      <h1>Estiven Chiluisa</h1>
-      <p>Estudiante de Ingeniería de Software. Comparto apuntes técnicos, arquitectura de código y proyectos de desarrollo.</p>
-      
-      <div class="tech-stack">
-        <span class="tech-pill">C++</span>
-        <span class="tech-pill">Java</span>
-        <span class="tech-pill">Python</span>
-        <span class="tech-pill">.NET</span>
-        <span class="tech-pill">Bases de Datos</span>
-        <span class="tech-pill">Git</span>
+  <main class="relative z-10 max-w-6xl mx-auto px-6 pt-28 pb-24">
+
+    <!-- HERO SECTION CON TU FOTO -->
+    <section id="sobre-mi" class="py-10 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <!-- Columna de Texto -->
+      <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-950/60 border border-sky-500/30 text-sky-300 text-xs font-mono">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+          </span>
+          Ingeniería en Software • Universidad Técnica de Ambato
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+          Hola, soy <br />
+          <span class="bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            Estiven Chiluisa
+          </span>
+        </h1>
+
+        <div class="h-8 font-mono text-base sm:text-lg text-slate-300">
+          <span>Especializado en: </span>
+          <span id="typewriter" class="text-sky-400 font-semibold typing-cursor"></span>
+        </div>
+
+        <p class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+          Estudiante de cuarto semestre de Ingeniería en Software apasionado por el diseño de arquitecturas de microservicios, estructuras de datos de alto rendimiento y desarrollo de aplicaciones web modernas. Comparto mis proyectos, laboratorios y apuntes técnicos.
+        </p>
+
+        <!-- Botones de Acción -->
+        <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
+          <a href="#proyectos" class="px-6 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-semibold shadow-lg shadow-sky-500/20 transition flex items-center gap-2">
+            <i class="fa-solid fa-code-branch"></i>
+            Ver Proyectos
+          </a>
+          <a href="#articulos" class="px-6 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-slate-200 border border-slate-700 font-medium transition flex items-center gap-2">
+            <i class="fa-solid fa-book-open text-sky-400"></i>
+            Leer Apuntes
+          </a>
+          <a href="https://github.com/Estiven453" target="_blank" class="px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition flex items-center gap-2">
+            <i class="fa-brands fa-github text-lg"></i>
+            @Estiven453
+          </a>
+        </div>
+
+        <!-- Mini contadores rápidos -->
+        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800/80 max-w-lg mx-auto lg:mx-0">
+          <div>
+            <p class="text-2xl font-bold text-white font-mono">12+</p>
+            <p class="text-xs text-slate-400">Repositorios Públicos</p>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-sky-400 font-mono">6+</p>
+            <p class="text-xs text-slate-400">Lenguajes Dominados</p>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-indigo-400 font-mono">4to</p>
+            <p class="text-xs text-slate-400">Semestre UTA</p>
+          </div>
+        </div>
       </div>
 
-      <div class="filter-bar" id="filter-bar">
-        <button class="filter-btn active" data-filter="all">Todos</button>
-        <button class="filter-btn" data-filter="estructuras">Estructuras de Datos</button>
-        <button class="filter-btn" data-filter="software">Ingeniería & Backend</button>
-        <button class="filter-btn" data-filter="apuntes">Metodologías</button>
+      <!-- Columna de la Foto de Perfil -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div class="relative group">
+          <div class="profile-glow rounded-3xl p-1.5 bg-slate-900">
+            <div class="relative w-64 h-72 sm:w-72 sm:h-80 rounded-2xl overflow-hidden bg-slate-800 border border-slate-700">
+              <!-- Carga perfil.jpg y usa el avatar de GitHub como respaldo automático -->
+              <img 
+                src="perfil.jpg" 
+                onerror="this.onerror=null; this.src='https://github.com/Estiven453.png';" 
+                alt="Estiven Chiluisa" 
+                class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-transparent opacity-70"></div>
+              <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                <div>
+                  <p class="text-white font-bold text-sm">Estiven Chiluisa V.</p>
+                  <p class="text-sky-400 font-mono text-xs">Software Developer</p>
+                </div>
+                <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-mono px-2.5 py-1 rounded-full">
+                  Activo
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Insignia flotante decorativa 1 -->
+          <div class=" -left-6 top-6 absolute bg-slate-900/95 border border-slate-700 px-3.5 py-2 rounded-xl shadow-xl flex items-center gap-2.5 animate-bounce" style="animation-duration: 3.5s;">
+            <i class="fa-solid fa-cubes text-sky-400 text-lg"></i>
+            <div class="text-left">
+              <p class="text-[10px] text-slate-400 uppercase font-mono">Arquitectura</p>
+              <p class="text-xs font-bold text-white">Microservicios</p>
+            </div>
+          </div>
+
+          <!-- Insignia flotante decorativa 2 -->
+          <div class="-right-6 bottom-12 absolute bg-slate-900/95 border border-slate-700 px-3.5 py-2 rounded-xl shadow-xl flex items-center gap-2.5 animate-bounce" style="animation-duration: 4.2s;">
+            <i class="fa-solid fa-diagram-project text-indigo-400 text-lg"></i>
+            <div class="text-left">
+              <p class="text-[10px] text-slate-400 uppercase font-mono">Algoritmos</p>
+              <p class="text-xs font-bold text-white">C++ & Java BST</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="articulos">
-      <div class="blog-grid" id="blog-grid">
-        <!-- Post 1 -->
-        <article class="post-card" data-category="estructuras" onclick="openModal(1)">
-          <div>
-            <div class="post-category">Estructuras de Datos</div>
-            <h3>Árboles Binarios de Búsqueda (BST) en C++</h3>
-            <p>Análisis de inserción, eliminación y recorridos (Inorden, Preorden, Postorden) aplicados a sistemas de gestión eficientes.</p>
+    <!-- SECCIÓN DE TECNOLOGÍAS INTERACTIVA -->
+    <section id="stack" class="py-14">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-widest text-sky-400 mb-2">// Stack Tecnológico</p>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">Lenguajes, Frameworks & Herramientas</h2>
+        </div>
+        <div class="flex flex-wrap gap-2" id="skill-filters">
+          <button onclick="filterSkills('all')" class="skill-tab active bg-sky-500 text-slate-950 font-semibold px-3.5 py-1.5 rounded-lg text-xs transition">Todos</button>
+          <button onclick="filterSkills('backend')" class="skill-tab bg-slate-800/80 text-slate-300 hover:bg-slate-700 px-3.5 py-1.5 rounded-lg text-xs transition">Backend & Core</button>
+          <button onclick="filterSkills('frontend')" class="skill-tab bg-slate-800/80 text-slate-300 hover:bg-slate-700 px-3.5 py-1.5 rounded-lg text-xs transition">Frontend Web</button>
+          <button onclick="filterSkills('db')" class="skill-tab bg-slate-800/80 text-slate-300 hover:bg-slate-700 px-3.5 py-1.5 rounded-lg text-xs transition">Datos & DevOps</button>
+        </div>
+      </div>
+
+      <div id="skills-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <!-- Generado dinámicamente por JS -->
+      </div>
+    </section>
+
+    <!-- SECCIÓN DE PROYECTOS DESTACADOS -->
+    <section id="proyectos" class="py-14">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-widest text-sky-400 mb-2">// Portafolio de Código</p>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">Proyectos y Laboratorios Destacados</h2>
+        </div>
+        <div class="flex flex-wrap gap-2" id="project-filters">
+          <button onclick="filterProjects('todos')" class="proj-tab bg-sky-500 text-slate-950 font-semibold px-4 py-1.5 rounded-full text-xs transition">Todos</button>
+          <button onclick="filterProjects('arquitectura')" class="proj-tab bg-slate-800/90 text-slate-300 hover:bg-slate-700 px-4 py-1.5 rounded-full text-xs transition">Microservicios & Web</button>
+          <button onclick="filterProjects('estructuras')" class="proj-tab bg-slate-800/90 text-slate-300 hover:bg-slate-700 px-4 py-1.5 rounded-full text-xs transition">Estructuras de Datos</button>
+        </div>
+      </div>
+
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Generado dinámicamente por JS -->
+      </div>
+    </section>
+
+    <!-- SECCIÓN DE APUNTES TÉCNICOS (CON LECTOR MODAL INTERACTIVO) -->
+    <section id="articulos" class="py-14">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-widest text-sky-400 mb-2">// Base de Conocimiento</p>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">Apuntes Técnicos y Artículos</h2>
+        </div>
+        <div class="flex flex-wrap gap-2" id="article-filters">
+          <button onclick="filterArticles('Todos')" class="art-tab bg-sky-500 text-slate-950 font-semibold px-4 py-1.5 rounded-full text-xs transition">Todos</button>
+          <button onclick="filterArticles('Estructuras de Datos')" class="art-tab bg-slate-800/90 text-slate-300 hover:bg-slate-700 px-4 py-1.5 rounded-full text-xs transition">Estructuras de Datos</button>
+          <button onclick="filterArticles('Ingeniería & Backend')" class="art-tab bg-slate-800/90 text-slate-300 hover:bg-slate-700 px-4 py-1.5 rounded-full text-xs transition">Ingeniería & Backend</button>
+          <button onclick="filterArticles('Metodologías')" class="art-tab bg-slate-800/90 text-slate-300 hover:bg-slate-700 px-4 py-1.5 rounded-full text-xs transition">Metodologías</button>
+        </div>
+      </div>
+
+      <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Generado dinámicamente por JS -->
+      </div>
+    </section>
+
+    <!-- TERMINAL INTERACTIVA -->
+    <section id="terminal-section" class="py-12">
+      <div class="spotlight-card rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+        <!-- Barra superior de la terminal -->
+        <div class="bg-slate-900/90 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+            <span class="ml-2 font-mono text-xs text-slate-400">estiven@uta-software:~ (bash)</span>
           </div>
-          <div class="post-meta">
-            <span>5 min de lectura</span>
-            <span class="read-more">Leer artículo →</span>
+          <span class="font-mono text-[11px] text-sky-400">Interactivo</span>
+        </div>
+
+        <!-- Cuerpo de la terminal -->
+        <div class="p-6 font-mono text-sm space-y-4 bg-[#070b16]/90">
+          <div class="flex flex-wrap items-center gap-2 pb-3 border-b border-slate-800/80">
+            <span class="text-xs text-slate-400 mr-1">Ejecutar comando rápido:</span>
+            <button onclick="runCommand('whoami')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-sky-500/20 text-sky-300 border border-slate-700 text-xs transition">whoami</button>
+            <button onclick="runCommand('skills')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-sky-500/20 text-sky-300 border border-slate-700 text-xs transition">skills --all</button>
+            <button onclick="runCommand('proyectos')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-sky-500/20 text-sky-300 border border-slate-700 text-xs transition">ls proyectos/</button>
+            <button onclick="runCommand('clear')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-rose-500/20 text-rose-300 border border-slate-700 text-xs transition">clear</button>
+          </div>
+
+          <div id="terminal-output" class="space-y-2 max-h-60 overflow-y-auto text-slate-300 text-xs sm:text-sm leading-relaxed">
+            <p class="text-emerald-400">Bienvenido a la consola interactiva de Estiven Chiluisa (v2.6.0).</p>
+            <p class="text-slate-400">Haz clic en los botones superiores o escribe un comando abajo (<span class="text-sky-400">help</span>, <span class="text-sky-400">whoami</span>, <span class="text-sky-400">skills</span>, <span class="text-sky-400">proyectos</span>, <span class="text-sky-400">clear</span>).</p>
+          </div>
+
+          <form onsubmit="handleTerminalSubmit(event)" class="flex items-center gap-2 pt-2 border-t border-slate-800/60">
+            <span class="text-emerald-400 font-bold">estiven@dev:~$</span>
+            <input 
+              id="terminal-input" 
+              type="text" 
+              placeholder="Escribe un comando (ej. skills) y presiona Enter..." 
+              class="w-full bg-transparent text-white focus:outline-none text-xs sm:text-sm"
+              autocomplete="off"
+            />
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL LECTOR DE ARTÍCULOS -->
+  <div id="article-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="bg-[#0d1326] border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
+      <button onclick="closeModal()" class="sticky top-2 float-right w-9 h-9 rounded-full bg-slate-800 hover:bg-rose-500/20 text-slate-300 hover:text-rose-400 flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+      <div id="modal-category" class="font-mono text-xs text-sky-400 uppercase tracking-wider mb-2"></div>
+      <h3 id="modal-title" class="text-2xl sm:text-3xl font-bold text-white mb-4"></h3>
+      <div id="modal-body" class="text-slate-300 space-y-4 leading-relaxed text-sm sm:text-base"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="relative z-10 border-t border-slate-800/80 bg-[#060913]/90 py-8">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+      <p class="font-mono">&lt;Estiven.dev /&gt; • Desarrollado por Estiven Chiluisa • Ambato, Ecuador</p>
+      <div class="flex items-center gap-5">
+        <a href="https://github.com/Estiven453" target="_blank" class="hover:text-sky-400 transition flex items-center gap-1.5">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS INTERACTIVOS -->
+  <script>
+    // 1. EFECTO TYPEWRITER
+    const roles = [
+      "Arquitectura de Microservicios (.NET & C#)",
+      "Estructuras de Datos en C++ y Java",
+      "Desarrollo Web Full-Stack (React, Django, PHP)",
+      "Bases de Datos Relacionales (SQL Server & PostgreSQL)"
+    ];
+    let roleIdx = 0, charIdx = 0, deleting = false;
+    const typeEl = document.getElementById('typewriter');
+
+    function tickTypewriter() {
+      const current = roles[roleIdx];
+      typeEl.textContent = current.substring(0, charIdx);
+
+      if (!deleting && charIdx < current.length) {
+        charIdx++;
+        setTimeout(tickTypewriter, 55);
+      } else if (deleting && charIdx > 0) {
+        charIdx--;
+        setTimeout(tickTypewriter, 30);
+      } else {
+        deleting = !deleting;
+        if (!deleting) roleIdx = (roleIdx + 1) % roles.length;
+        setTimeout(tickTypewriter, deleting ? 1800 : 350);
+      }
+    }
+    tickTypewriter();
+
+    // 2. DATA Y RENDER DE HABILIDADES
+    const skillsData = [
+      { name: "C++", category: "backend", icon: "fa-solid fa-code", level: "Avanzado" },
+      { name: "Java", category: "backend", icon: "fa-brands fa-java", level: "Avanzado" },
+      { name: "C# / .NET", category: "backend", icon: "fa-solid fa-server", level: "Microservicios" },
+      { name: "Python", category: "backend", icon: "fa-brands fa-python", level: "Backend & Scripts" },
+      { name: "PHP", category: "backend", icon: "fa-brands fa-php", level: "Web Dinámica" },
+      { name: "JavaScript", category: "frontend", icon: "fa-brands fa-js", level: "ES6+ & DOM" },
+      { name: "React", category: "frontend", icon: "fa-brands fa-react", level: "SPA Frontend" },
+      { name: "HTML5 & CSS3", category: "frontend", icon: "fa-brands fa-html5", level: "Diseño Responsive" },
+      { name: "Bootstrap", category: "frontend", icon: "fa-brands fa-bootstrap", level: "UI Frameworks" },
+      { name: "SQL Server & Postgres", category: "db", icon: "fa-solid fa-database", level: "Modelado 3NF" },
+      { name: "Docker & Linux", category: "db", icon: "fa-brands fa-docker", level: "Contenedores" },
+      { name: "Git & GitHub", category: "db", icon: "fa-brands fa-git-alt", level: "Flujo Colaborativo" }
+    ];
+
+    function filterSkills(cat) {
+      const grid = document.getElementById('skills-grid');
+      const items = cat === 'all' ? skillsData : skillsData.filter(s => s.category === cat);
+      grid.innerHTML = items.map(s => `
+        <div class="spotlight-card p-4 rounded-xl flex flex-col items-start gap-2">
+          <div class="w-9 h-9 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
+            <i class="${s.icon} text-lg"></i>
+          </div>
+          <p class="font-semibold text-white text-sm mt-1">${s.name}</p>
+          <span class="text-[11px] font-mono text-slate-400">${s.level}</span>
+        </div>
+      `).join('');
+      initSpotlight();
+    }
+    filterSkills('all');
+
+    // 3. DATA Y RENDER DE PROYECTOS REALES
+    const projectsData = [
+      {
+        title: "Credit-Simulation (Microservicios)",
+        category: "arquitectura",
+        tech: [".NET 10", "React", "SQL Server", "Microservicios"],
+        desc: "Sistema de simulación de préstamos utilizando los métodos de amortización Francés y Alemán, diseñado con una arquitectura de microservicios, autenticación y persistencia en SQL Server.",
+        repo: "https://github.com/Estiven453"
+      },
+      {
+        title: "CineScope (MyCdS-Proyecto)",
+        category: "arquitectura",
+        tech: ["JavaScript ES", "HTML5", "CSS3/SCSS", "Git Flow"],
+        desc: "Aplicación web interactiva para consultar, filtrar y organizar películas y series. Integra diseño responsive, módulos JS nativos, persistencia local y flujo colaborativo mediante Pull Requests.",
+        repo: "https://github.com/Estiven453"
+      },
+      {
+        title: "Gestión Empresarial con Árboles BST",
+        category: "estructuras",
+        tech: ["C++", "Árboles Binarios", "POO", "Algoritmos"],
+        desc: "Sistema de gestión de personal implementado mediante Árboles Binarios de Búsqueda (BST) en C++, optimizando operaciones de búsqueda, inserción y recorridos jerárquicos.",
+        repo: "https://github.com/Estiven453/Arbol-BST-Empresa-cpp"
+      },
+      {
+        title: "Inventario de Equipos de Laboratorio",
+        category: "estructuras",
+        tech: ["C++", "Java", "Vectores", "Estructuras"],
+        desc: "Sistema de control e inventario para equipos de laboratorio y prácticas de recorridos (Preorden, Inorden y Postorden) aplicando estructuras de datos dinámicas.",
+        repo: "https://github.com/Estiven453/APE1_EquiposLaboratorio"
+      }
+    ];
+
+    function filterProjects(cat) {
+      const grid = document.getElementById('projects-grid');
+      const items = cat === 'todos' ? projectsData : projectsData.filter(p => p.category === cat);
+      grid.innerHTML = items.map(p => `
+        <div class="spotlight-card rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="font-mono text-xs text-sky-400 uppercase">// Proyecto Destacado</span>
+              <a href="${p.repo}" target="_blank" class="text-slate-400 hover:text-white transition">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">${p.title}</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-5">${p.desc}</p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-3 border-t border-slate-800/80">
+            ${p.tech.map(t => `<span class="px-2.5 py-1 rounded-md bg-slate-900 text-sky-300 font-mono text-[11px] border border-slate-800">${t}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+      initSpotlight();
+    }
+    filterProjects('todos');
+
+    // 4. DATA Y RENDER DE ARTÍCULOS CON LECTOR MODAL
+    const articlesData = [
+      {
+        id: 1,
+        category: "Estructuras de Datos",
+        title: "Árboles Binarios de Búsqueda (BST) en C++",
+        time: "5 min de lectura",
+        summary: "Análisis de inserción, eliminación y recorridos (Inorden, Preorden, Postorden) aplicados a sistemas de gestión eficientes.",
+        content: `
+          <p>Los <strong>Árboles Binarios de Búsqueda (BST)</strong> permiten mantener colecciones ordenadas logrando búsquedas e inserciones en tiempo promedio <code>O(log n)</code>.</p>
+          <h4 class="text-white font-bold mt-4">Estructura de un Nodo en C++</h4>
+          <pre class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-sky-300 overflow-x-auto border border-slate-800">struct Nodo {
+    int id;
+    string nombre;
+    Nodo* izquierdo;
+    Nodo* derecho;
+    Nodo(int _id, string _n) : id(_id), nombre(_n), izquierdo(nullptr), derecho(nullptr) {}
+};</pre>
+          <p>El recorrido <strong>Inorden</strong> (Izquierdo - Raíz - Derecho) visita los nodos en orden ascendente estricto, ideal para listar registros de personal o inventarios ordenados por clave primaria.</p>
+        `
+      },
+      {
+        id: 2,
+        category: "Ingeniería & Backend",
+        title: "Control de Versiones y Arquitectura de Microservicios",
+        time: "4 min de lectura",
+        summary: "Buenas prácticas con ramas en Git, resolución de conflictos en Pull Requests y desacoplamiento de servicios en .NET.",
+        content: `
+          <p>En proyectos colaborativos de Ingeniería en Software, trabajar con ramas dedicadas (<code>feature/</code>, <code>develop</code>, <code>hotfix/</code>) protege la estabilidad de la rama <code>main</code>.</p>
+          <h4 class="text-white font-bold mt-4">Ventajas de los Microservicios</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Despliegue independiente de servicios (Autenticación, Lógica de Negocio, Logs).</li>
+            <li>Comunicación limpia mediante un <strong>API Gateway</strong> y contratos REST JSON.</li>
+            <li>Persistencia aislada y migraciones controladas en motores como SQL Server.</li>
+          </ul>
+        `
+      },
+      {
+        id: 3,
+        category: "Metodologías",
+        title: "Diseño de Bases de Datos Relacionales y Normalización",
+        time: "6 min de lectura",
+        summary: "Cómo estructurar tablas hasta la Tercera Forma Normal (3NF) para asegurar consistencia e integridad referencial.",
+        content: `
+          <p>La normalización evita la redundancia de datos y anomalías de actualización en motores como <strong>PostgreSQL</strong> y <strong>Microsoft SQL Server</strong>.</p>
+          <ul class="list-disc pl-5 space-y-2 mt-3">
+            <li><strong>1NF:</strong> Atomicidad en cada atributo y eliminación de grupos repetitivos.</li>
+            <li><strong>2NF:</strong> Dependencia funcional completa respecto a la clave primaria compuesta.</li>
+            <li><strong>3NF:</strong> Eliminación de dependencias transitivas entre atributos no clave.</li>
+          </ul>
+        `
+      }
+    ];
+
+    function filterArticles(cat) {
+      const grid = document.getElementById('articles-grid');
+      const items = cat === 'Todos' ? articlesData : articlesData.filter(a => a.category === cat);
+      grid.innerHTML = items.map(a => `
+        <article class="spotlight-card rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-sky-400">${a.category}</span>
+            <h3 class="text-lg font-bold text-white mt-2 mb-3">${a.title}</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">${a.summary}</p>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-slate-800/80 text-xs">
+            <span class="text-slate-500 font-mono">${a.time}</span>
+            <button onclick="openArticle(${a.id})" class="text-sky-400 hover:text-sky-300 font-semibold flex items-center gap-1">
+              Leer artículo <span>→</span>
+            </button>
           </div>
         </article>
+      `).join('');
+      initSpotlight();
+    }
+    filterArticles('Todos');
 
-        <!-- Post 2 -->
-        <article class="post-card" data-category="software" onclick="openModal(2)">
-          <div>
-            <div class="post-category">Ingeniería & Backend</div>
-            <h3>Control de Versiones y Flujo de Trabajo en Equipo</h3>
-            <p>Buenas prácticas con ramas, resolución de conflictos y revisiones de Pull Requests en entornos de trabajo colaborativo.</p>
-          </div>
-          <div class="post-meta">
-            <span>4 min de lectura</span>
-            <span class="read-more">Leer artículo →</span>
-          </div>
-        </article>
+    function openArticle(id) {
+      const art = articlesData.find(a => a.id === id);
+      if (!art) return;
+      document.getElementById('modal-category').textContent = art.category;
+      document.getElementById('modal-title').textContent = art.title;
+      document.getElementById('modal-body').innerHTML = art.content;
+      const modal = document.getElementById('article-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
 
-        <!-- Post 3 -->
-        <article class="post-card" data-category="apuntes" onclick="openModal(3)">
-          <div>
-            <div class="post-category">Metodologías</div>
-            <h3>Diseño de Bases de Datos Relacionales y Normalización</h3>
-            <p>Cómo estructurar tablas hasta la Tercera Forma Normal (3NF) para asegurar consistencia e integridad referencial.</p>
-          </div>
-          <div class="post-meta">
-            <span>6 min de lectura</span>
-            <span class="read-more">
+    function closeModal() {
+      const modal = document.getElementById('article-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // 5. TERMINAL INTERACTIVA
+    const termOutput = document.getElementById('terminal-output');
+    function runCommand(cmd) {
+      const clean = cmd.trim().toLowerCase();
+      if (clean === 'clear') {
+        termOutput.innerHTML = '';
+        return;
+      }
+      let response = '';
+      if (clean === 'help') {
+        response = 'Comandos disponibles: <span class="text-sky-400">whoami</span>, <span class="text-sky-400">skills</span>, <span class="text-sky-400">proyectos</span>, <span class="text-sky-400">clear</span>';
+      } else if (clean === 'whoami') {
+        response = 'Estiven Sebastian Chiluisa Vasquez — Estudiante de 4to semestre de Ingeniería en Software en la Universidad Técnica de Ambato (UTA).';
+      } else if (clean.startsWith('skills')) {
+        response = '[Backend]: C++, Java, C# (.NET), Python, PHP | [Frontend]: HTML5, CSS3, JS, React, Bootstrap | [DB & DevOps]: SQL Server, PostgreSQL, Docker, Linux, Git.';
+      } else if (clean.startsWith('proyectos') || clean.startsWith('ls')) {
+        response = '📁 Credit-simulation/   📁 MyCdS-Proyecto/   📁 Arbol-BST-Empresa-cpp/   📁 APE1_EquiposLaboratorio/';
+      } else {
+        response = `Comando no reconocido: "${cmd}". Escribe <span class="text-sky-400">help</span> para ver la lista de comandos.`;
+      }
+
+      termOutput.innerHTML += `
+        <div>
+          <span class="text-emerald-400">estiven@dev:~$</span> <span class="text-white">${cmd}</span>
+          <p class="text-slate-300 pl-3 mt-0.5">${response}</p>
+        </div>
+      `;
+      termOutput.scrollTop = termOutput.scrollHeight;
+    }
+
+    function handleTerminalSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('terminal-input');
+      if (!input.value.trim()) return;
+      runCommand(input.value);
+      input.value = '';
+    }
+
+    // 6. EFECTO SPOTLIGHT EN TARJETAS
+    function initSpotlight() {
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        card.onmousemove = e => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+          card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        };
+      });
+    }
+    initSpotlight();
+
+    // 7. ANIMACIÓN DE PARTÍCULAS EN CANVAS
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 45; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.8 + 0.8
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.35)';
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          let p2 = particles[j];
+          let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 130) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.12 * (1 - dist / 130)})`;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+  </script>
+</body>
+</html>
